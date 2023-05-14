@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: user-service
+          image: user-service:v1
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: user-service-db-env-file
+            - configMapRef:
+                name: user-service-env-file
+            - secretRef:
+                name: db-secret-file
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 1100m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-service
+spec:
+  selector:
+    matchLabels:
+      app: flight-service
+  template:
+    metadata:
+      labels:
+        app: flight-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: flight-service
+          image: flight-service:v1
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: flight-service-db-env-file
+            - configMapRef:
+                name: flight-service-env-file
+            - secretRef:
+                name: db-secret-file
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 370m
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-reservation-service
+spec:
+  selector:
+    matchLabels:
+      app: flight-reservation-service
+  template:
+    metadata:
+      labels:
+        app: flight-reservation-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: flight-reservation-service
+          image: flight-reservation-service:v1
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: flight-reservation-service-db-env-file
+            - configMapRef:
+                name: flight-reservation-service-env-file
+            - secretRef:
+                name: db-secret-file
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 1450m

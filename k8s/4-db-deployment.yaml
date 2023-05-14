@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-db
+spec:
+  selector:
+    matchLabels:
+      app: user-service-db
+  template:
+    metadata:
+      labels:
+        app: user-service-db
+    spec:
+      containers:
+        - name: user-service-db
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: user-service-db-env-file
+            - secretRef:
+                name: db-secret-file
+          volumeMounts:
+            - mountPath: /data/db
+              name: user-service-db-volume
+      volumes:
+        - name: user-service-db-volume
+          hostPath:
+            path: /user-service-db-volume
+            type: DirectoryOrCreate
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-service-db
+spec:
+  selector:
+    matchLabels:
+      app: flight-service-db
+  template:
+    metadata:
+      labels:
+        app: flight-service-db
+    spec:
+      containers:
+        - name: flight-service-db
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: flight-service-db-env-file
+            - secretRef:
+                name: db-secret-file
+          volumeMounts:
+            - mountPath: /data/db
+              name: flight-service-db-volume
+      volumes:
+        - name: flight-service-db-volume
+          hostPath:
+            path: /flight-service-db-volume
+            type: DirectoryOrCreate
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-reservation-service-db
+spec:
+  selector:
+    matchLabels:
+      app: flight-reservation-service-db
+  template:
+    metadata:
+      labels:
+        app: flight-reservation-service-db
+    spec:
+      containers:
+        - name: flight-reservation-service-db
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: flight-reservation-service-db-env-file
+            - secretRef:
+                name: db-secret-file
+          volumeMounts:
+            - mountPath: /data/db
+              name: flight-reservation-service-db-volume
+      volumes:
+        - name: flight-reservation-service-db-volume
+          hostPath:
+            path: /flight-reservation-service-db-volume
+            type: DirectoryOrCreate

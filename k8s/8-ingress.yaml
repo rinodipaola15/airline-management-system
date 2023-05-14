@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spring-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS, DELETE"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Content-Type"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+spec:
+  rules:
+  - host: airline-management-system.app.loc
+    http:
+      paths:
+      - path: /user-service(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 8080
+      - path: /flight-service(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: flight-service
+            port:
+              number: 8080
+      - path: /flight-reservation-service(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: flight-reservation-service
+            port:
+              number: 8080
