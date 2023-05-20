@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mongodb_lib import *
 
 microservices = ['user-service', 'flight-service', 'flight-reservation-service']
-mode = "STAGESv2_scaling_test_stages_burst3"
+mode = "test_collection"
 num_stages = 4
 
 if __name__ == '__main__':
