@@ -104,3 +104,18 @@ curl airline-management-system.app.loc/flight-service/flights/deleteAllFlights -
 # Delete all flight reservations
 curl airline-management-system.app.loc/flight-reservation-service/flight_reservations/deleteAllFlightReservations -X DELETE
 ```
+
+### Performance analysis
+
+NB: Remember to set all configurations (load shape, collections names, etc.).
+
+```
+# Single-file execution
+python scripts_running.py
+
+# File-by-file execution
+python load_generator.py
+python metrics_fetching.py
+python metrics_analysis.py
+python distribution_graph.py
+```
