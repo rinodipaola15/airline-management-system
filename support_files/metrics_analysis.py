@@ -5,7 +5,7 @@ from prometheus_lib import *
 from sklearn.linear_model import LinearRegression
 
 microservices = ['flight-reservation-service']
-mode = "saturation"
+mode = "test_collection"
 
 def linear_regression(x, y, title, xlabel_title, ylabel_title):
 
