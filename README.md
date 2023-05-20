@@ -1,5 +1,5 @@
 # Airline Management System
-This is a thesis project, developed for my master's thesis in Computer Engineering. It consists of the development of a microservices application using Spring Boot, Docker and Kubernetes and the application of a horizontal autoscaling mechanism, with the goal of improving the performance, in terms of response time, of the application.
+This is a thesis project, realized for my master's thesis in Computer Engineering. It consists of the development of a microservices application using Spring Boot, Docker and Kubernetes and the application of a horizontal autoscaling mechanism, with the goal of improving the performance, in terms of response time, of the application.
 
 ## Kubernetes
 
