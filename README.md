@@ -25,7 +25,7 @@ kubectl apply -f node_exporter/
 kubectl apply -f autoscaler/custom-hpa
 ```  
 
-Enable metrics-server and kube-state-metrics
+Enable metrics-server
 ```  
 minikube addons enable metrics-server
 ```  
