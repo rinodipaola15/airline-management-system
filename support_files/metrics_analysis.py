@@ -4,7 +4,7 @@ from mongodb_lib import *
 from prometheus_lib import *
 from sklearn.linear_model import LinearRegression
 
-microservices = ['flight-reservation-service']
+microservices = ['user-service', 'flight-service', 'flight-reservation-service']
 mode = "test_collection"
 
 def linear_regression(x, y, title, xlabel_title, ylabel_title):
